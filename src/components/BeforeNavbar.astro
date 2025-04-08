@@ -1,0 +1,33 @@
+---
+import { beforeNavbar } from "../data";
+---
+<div class="before-navbar bg-yellow-500 text-white text-sm transition-all duration-500 ease-in-out relative overflow-hidden">
+    <!-- Fondo animado que simula una sirena de asistencia -->
+    <div class="absolute inset-0 bg-gradient-to-l from-blue-900 via-blue-400 to-blue-900 bg-[length:400%_100%]" style="animation: slide 6s linear infinite;"></div>
+
+    <!-- Contenido visible sobre el fondo animado -->
+    <div class="relative z-10 container mx-auto px-4 py-2 flex flex-wrap justify-center items-center gap-4 lg:gap-6">
+        <a href={beforeNavbar.phone.link} class="flex items-center gap-1 ">
+            <i class="uil uil-phone-alt text-lg"></i>
+            <span class="text-shadow">{beforeNavbar.phone.text}</span>
+        </a>
+        <a href={beforeNavbar.service.link} class="hidden sm:flex items-center gap-1 ">
+            <i class="uil uil-clock text-lg"></i>
+            <span class="text-shadow">{beforeNavbar.service.text}</span>
+        </a>
+        <a href={beforeNavbar.location.link} target="_blank" class="hidden md:flex items-center gap-1 ">
+            <i class="uil uil-map-marker text-lg"></i>
+            <span class="text-shadow">{beforeNavbar.location.text}</span>
+        </a>
+    </div>
+</div>
+
+<style>
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Ajusta la sombra según tus necesidades */
+    }
+    @keyframes slide {
+        0% { background-position: 100%; }
+        100% { background-position: -200%; } /* Incremento del movimiento para una animación más rápida y llamativa */
+    }
+</style>

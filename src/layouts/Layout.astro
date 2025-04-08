@@ -1,0 +1,46 @@
+---
+import '../assets/css/tailwind.css'
+import '../../node_modules/tobii/dist/css/tobii.min.css'
+import '../../node_modules/tiny-slider/dist/tiny-slider.css'
+import '../../node_modules/@iconscout/unicons/css/line.css'
+import '../assets/css/materialdesignicons.min.css'
+import Switcher from '../components/switcher.astro'
+
+---
+<!doctype html>
+<html lang="en" class="light scroll-smooth" dir="ltr">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Upwind - Astro Js Landing Page Template</title>
+        <meta name="description" content="Responsive Tailwind CSS Template">
+        <meta name="keywords" content="Onepage, creative, modern, Tailwind CSS, multipurpose, clean">
+        <meta name="author" content="Shreethemes">
+        <meta name="website" content="https://shreethemes.in">
+        <meta name="email" content="support@shreethemes.in">
+        <meta name="version" content="2.1.0">
+        <!-- favicon -->
+        <link href="/favicon.ico" rel="shortcut icon">
+      <script src="/js/app.js" defer></script>
+      <script src="/js/easy_background.js" defer></script>
+      <script src="/js/plugins.init.js" defer></script>
+      <script src="/js/gumshoe.polyfills.min.js" defer></script>
+      <script src="/js/tiny-slider.js" defer></script>
+    </head>
+    
+	<body class="font-rubik text-base text-slate-900 dark:text-white dark:bg-slate-900">
+		<slot />
+    <Switcher/>
+
+    <script>
+      import Tobii from "tobii";
+  
+      document.addEventListener("DOMContentLoaded", function () {
+        new Tobii();
+      });
+
+    </script>
+	</body>
+</html>
+
+

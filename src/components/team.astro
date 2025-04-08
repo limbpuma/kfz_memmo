@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import { teamData, sectionHeaders } from "../data";
+
+interface TeamData {
+  image: ImageMetadata;
+  social: string[];
+  name: string;
+  position: string;
+}
+---
+
+<div class="container">
+  <div class="grid grid-cols-1 pb-8 text-center">
+    <h6 class="text-blue-600 text-base font-medium uppercase mb-2">{sectionHeaders.team.title}</h6>
+    <h3 class="mb-4 md:text-2xl text-xl font-medium dark:text-white">{sectionHeaders.team.subtitle}</h3>
+    <p class="text-slate-400 max-w-xl mx-auto">{sectionHeaders.team.text}</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+    {teamData.map((item: TeamData) => (
+      <div class="relative rounded-md shadow-lg overflow-hidden group">
+        <!-- Contenedor con relación de aspecto fija para consistencia -->
+        <div class="aspect-[4/5] w-full relative">
+          <Image 
+            src={item.image} 
+            alt={item.name}
+            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" 
+            width={600} 
+            height={750}
+            format="webp"
+            quality={85}
+          />
+        </div>
+
+        <!-- Overlay y contenido -->
+        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 z-0 transition duration-500"></div>
+
+        <ul class="list-none absolute z-10 opacity-0 group-hover:opacity-100 top-4 end-4 mb-0 transition-all duration-500">
+          {item.social.map((icon) => (
+            <li class="mb-1">
+              <a href="#" class="btn bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white btn-icon btn-sm rounded-full">
+                <i class={icon}></i>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="content absolute start-4 end-4 bottom-4 bg-white dark:bg-slate-900 opacity-0 group-hover:opacity-100 p-4 rounded-md text-center transition-all duration-500">
+          <a href="#" class="h5 text-md dark:text-white hover:text-blue-600 dark:hover:text-blue-600 font-medium">{item.name}</a>
+          <h6 class="text-slate-400 mb-0 font-light">{item.position}</h6>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

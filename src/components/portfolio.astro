@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { portfolioData, sectionHeaders } from "../data";
+
+interface portfolio {
+  image: ImageMetadata;
+  title: string;
+  subTitle: string;
+}
+---
+
+<div class="container">
+  <div class="grid grid-cols-1 pb-8 text-center">
+    <h6 class="text-blue-600 text-base font-medium uppercase mb-2">{sectionHeaders.portfolio.title}</h6>
+    <h3 class="mb-4 md:text-2xl text-xl font-medium dark:text-white">{sectionHeaders.portfolio.subtitle}</h3>
+    <p class="text-slate-400 max-w-xl mx-auto">{sectionHeaders.portfolio.text}</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 mt-8">
+    {portfolioData.map((item: portfolio) => (
+      <div class="relative rounded-md shadow-sm overflow-hidden group">
+        <!-- Responsive image container with fixed aspect ratio -->
+        <div class="aspect-[4/3] w-full relative">
+          <Image
+            src={item.image}
+            alt={item.title}
+            class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:rotate-3"
+            width={600}
+            height={400}
+            format="webp"
+            quality={85}
+          />
+          <div class="absolute inset-0 group-hover:bg-black opacity-50 transition duration-500 z-0"></div>
+
+          <!-- Overlay content -->
+          <div class="content">
+            <div class="icon absolute z-10 opacity-0 group-hover:opacity-100 top-4 end-4 transition-all duration-500">
+              <a href={item.image.src} class="btn bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white btn-icon rounded-full lightbox">
+                <i class="uil uil-camera"></i>
+              </a>
+            </div>
+
+            <div class="absolute z-10 opacity-0 group-hover:opacity-100 bottom-4 start-4 transition-all duration-500">
+              <a href="/portfolio-detail" class="h6 text-md font-medium text-white hover:text-blue-600 transition duration-500">{item.title}</a>
+              <p class="text-slate-100 tag mb-0">{item.subTitle}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

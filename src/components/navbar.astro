@@ -1,0 +1,88 @@
+---
+import logoDark from '../assets/images/logo-dark.png';
+import logoLight from '../assets/images/logo-light.png';
+import { navbarLinks, socialLinks } from "../data";
+import BeforeNavbar from './BeforeNavbar.astro';
+import { Image } from 'astro:assets';
+---
+
+<nav class="navbar transition-all duration-500" id="navbar">
+    <!-- BEFORE NAVBAR: info stripe -->
+    <BeforeNavbar/>
+
+    <!-- MAIN NAVBAR -->
+    <div class="container flex flex-wrap items-center justify-end py-1">
+        <a class="navbar-brand relative inline-block text-center" href="/">
+            <!-- Contenedor del logo -->
+            <div class="mx-auto max-w-[180px] h-auto flex flex-col items-center justify-center relative z-10">
+
+              <!-- Logo en modo claro -->
+              <span class="inline-block dark:hidden">
+                <Image 
+                  src={logoDark} 
+                  alt="DENIZ KFZ Logo Light" 
+                  class="h-10 w-auto drop-shadow-[0_6px_12px_rgba(0,0,0,0.3)] brightness-110 contrast-105 transition-all duration-300 ease-in-out hover:scale-105" 
+                  format="png"
+                />
+              </span>
+          
+              <!-- Logo en modo oscuro -->
+              <span class="hidden dark:inline-block">
+                <Image 
+                  src={logoLight} 
+                  alt="DENIZ KFZ Logo Darkmode" 
+                  class="h-10 w-auto drop-shadow-[0_6px_12px_rgba(255,255,255,0.15)] brightness-125 contrast-110 transition-all duration-300 ease-in-out hover:scale-105" 
+                  format="png"
+                />
+              </span>
+            </div>
+          
+            <!-- Texto debajo del logo con efecto 3D -->
+            <p class="ml-2 text-sm font-extrabold tracking-wide uppercase text-blue-600 dark:text-blue-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.25)] hover:drop-shadow-[0_3px_4px_rgba(0,0,0,0.35)] transition-all duration-300">
+                DENIZ
+              </p>
+          </a>
+          
+
+        <div class="nav-icons flex items-center lg_992:order-2 ms-auto">
+            <ul class="list-none menu-social mb-0 flex space-x-2">
+                {socialLinks.map((social) => (
+                    <li>
+                        <a href={social.href} target="_blank" class="btn btn-sm btn-icon rounded-full bg-blue-600 hover:bg-blue-700 text-white transition">
+                            <i class={social.iconClass} title={social.title}></i>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+            <button data-collapse="menu-collapse" type="button" class="collapse-btn inline-flex items-center ms-3 text-dark dark:text-white lg_992:hidden" aria-controls="menu-collapse" aria-expanded="false">
+                <span class="sr-only">Navigation Menu</span>
+                <i class="mdi mdi-menu mdi-24px"></i>
+            </button>
+        </div>
+
+        <div class="navigation lg_992:order-1 lg_992:flex hidden" id="menu-collapse">
+            <ul class="navbar-nav nav-light flex flex-wrap">
+                {navbarLinks.map((link) => (
+                    <li class="nav-item">
+                        <a class="nav-link" href={link.href}>{link.title}</a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar End -->
+
+<script>
+    import Gumshoe from "gumshoejs";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        new Gumshoe("#navbar-navlist a", {
+            offset: 80, // Adjust according to your navbar height
+            reflow: true,
+            events: true,
+        });
+    });
+
+</script>

@@ -1,0 +1,67 @@
+---
+import { clientData, sectionHeaders } from "../data";
+
+interface ClientData{
+    image: ImageMetadata;
+    name: string;
+    post: string;
+    desc: string;
+}
+---
+
+<div class="container">
+    <div class="grid grid-cols-1 pb-8 text-center">
+        <h6 class="text-blue-600 text-base font-medium uppercase mb-2">{sectionHeaders.client.title}</h6>
+        <h3 class="mb-4 md:text-2xl text-xl font-medium dark:text-white">{sectionHeaders.client.subtitle}</h3>
+
+        <p class="text-slate-400 max-w-xl mx-auto">{sectionHeaders.client.text}</p>
+    </div>
+    
+    <div class="grid grid-cols-1 mt-8 relative">
+        <div class="tiny-two-item">
+            {clientData.map((item:ClientData)=>( 
+                <div class="tiny-slide">
+                    <div class="lg:flex p-6 lg:p-0 relative rounded-md shadow-sm shadow-slate-200 dark:shadow-slate-700 bg-white dark:bg-slate-900 overflow-hidden m-2">
+                        <img class="size-24 lg:w-48 lg:h-auto lg:rounded-none rounded-full mx-auto" src={item.image.src} alt="" width="384" height="512"/>
+                        <div class="pt-6 lg:p-6 text-center lg:text-left space-y-4">
+                            <p class="text-base text-slate-500 dark:text-slate-200">{item.desc}</p>
+                            
+                            <div>
+                                <span class="text-blue-600 block mb-1">{item.name}</span>
+                                <span class="text-slate-400 text-sm dark:text-white/60 block">{item.post}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+<script>
+import { tns } from 'tiny-slider';
+
+  if(document.getElementsByClassName('tiny-two-item').length > 0) {
+    var slider = tns({
+        container: '.tiny-two-item',
+        controls: true,
+        mouseDrag: true,
+        loop: true,
+        rewind: true,
+        autoplay: true,
+        autoplayButtonOutput: false,
+        autoplayTimeout: 3000,
+        navPosition: "bottom",
+        controlsText: ['<i class="mdi mdi-chevron-left "></i>', '<i class="mdi mdi-chevron-right"></i>'],
+        nav: false,
+        speed: 400,
+        gutter: 0,
+        responsive: {
+            768: {
+                items: 2
+            },
+        },
+    });
+};
+
+</script>

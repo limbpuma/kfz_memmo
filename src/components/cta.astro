@@ -1,0 +1,41 @@
+---
+import bgVideo from '../assets/images/bg/cta.webm';
+import { Image } from 'astro:assets';
+import { ctaData } from "../data";
+--- 
+ 
+<section class="relative py-24 w-full table overflow-hidden">
+  <!-- Imagen optimizada con astro:assets -->
+  <video 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    class="absolute inset-0 w-full h-full object-cover z-0"
+  >
+    <source src={bgVideo} type="video/webm" />
+    <!-- Fallback -->
+    Your browser does not support the video tag.
+  </video>
+
+
+  <!-- Filtro oscuro encima del fondo -->
+  <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
+
+  <!-- Contenido CTA -->
+  <div class="container relative z-20">
+    <div class="grid grid-cols-1 pb-8 text-center">
+      <h3 class="mb-6 md:text-3xl text-2xl text-white font-medium">{ctaData.title}</h3>
+      <p class="text-white opacity-50 max-w-xl mx-auto">{ctaData.description}</p>
+
+      <div class="relative mt-10">
+        <a 
+          href={ctaData.buttonUrl} 
+          class="inline-block bg-blue-700 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        >
+          {ctaData.buttonLabel}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

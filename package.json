@@ -1,0 +1,21 @@
+{
+  "name": "upwind",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Upwind - Astro Js Landing Page Template",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@iconscout/unicons": "^4.2.0",
+    "@tailwindcss/vite": "^4.0.6",
+    "astro": "^5.6.1",
+    "gumshoejs": "^5.1.2",
+    "tailwindcss": "^4.0.6",
+    "tiny-slider": "^2.9.4",
+    "tobii": "^2.0.0-alpha"
+  }
+}

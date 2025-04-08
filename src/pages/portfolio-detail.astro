@@ -1,0 +1,92 @@
+---
+import Navbar from "../components/navbar.astro";
+import Layout from "../layouts/Layout.astro";
+
+import portfolio1 from '../assets/images/portfolio/portfolio1.jpg'
+import portfolio2 from '../assets/images/portfolio/portfolio2.jpg'
+import portfolio3 from '../assets/images/portfolio/portfolio3.jpg'
+import Footer from "../components/footer.astro";
+---
+
+<Layout>
+    <Navbar/>
+
+     <section class="py-28 w-full table relative bg-[url('../../assets/images/bg/auth.jpg')] bg-top bg-no-repeat">
+        <div class="absolute inset-0 bg-slate-950/80"></div>
+
+        <div class="container">
+            <div class="grid grid-cols-1 pb-8 text-center mt-10">
+                <h3 class="mb-3 text-3xl leading-normal font-medium text-white">New Trends in SEO</h3>
+
+                <ul class="list-none">
+                    <li class="inline text-white/60 me-2"> <span class="text-white">Client :</span> Calvin Carlo</li>
+                    <li class="inline text-white/60"> <span class="text-white">Date :</span> 23th May, 2022</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative md:py-24 py-16">
+        <div class="container">
+            <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
+                <div class="lg:col-span-5 md:col-span-6">
+                    <div class="grid grid-cols-1 gap-[30px]">
+                        <img src={portfolio1.src} class="rounded-md" alt="">
+                        <img src={portfolio2.src} class="rounded-md" alt="">
+                        <img src={portfolio3.src} class="rounded-md" alt="">
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 md:col-span-6">
+                    <div class="sticky top-20">
+                        <div class="grid lg:grid-cols-12 grid-cols-1 gap-[30px]">
+                            <div class="lg:col-span-12">
+                                <div class="work-details">
+                                    <h4 class="text-xl font-medium mb-3 border-b border-gray-100 dark:border-gray-700 pb-3 dark:text-white">Project Detail :</h4>
+                                    <p class="text-slate-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci non dolorem consequatur vitae hic.</p>
+                                    <p class="text-slate-400 mt-2">Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="lg:col-span-7">
+                                <div class="bg-gray-50 dark:bg-slate-800 shadow-sm dark:shadow-gray-800 p-6 rounded-md">
+                                    <h5 class="text-lg font-medium border-b border-gray-100 dark:border-gray-700 pb-3 mb-3 dark:text-white">Project Info :</h5>
+                                    <dl class="grid grid-cols-12 mb-0">
+                                        <dt class="md:col-span-4 col-span-5 mt-2 dark:text-white">Client :</dt>
+                                        <dd class="md:col-span-8 col-span-7 mt-2 text-slate-400">Calvin Carlo</dd>
+
+                                        <dt class="md:col-span-4 col-span-5 mt-2 dark:text-white">Category :</dt>
+                                        <dd class="md:col-span-8 col-span-7 mt-2 text-slate-400">Web Design</dd>
+
+                                        <dt class="md:col-span-4 col-span-5 mt-2 dark:text-white">Date :</dt>
+                                        <dd class="md:col-span-8 col-span-7 mt-2 text-slate-400">23rd July, 2023</dd>
+
+                                        <dt class="md:col-span-4 col-span-5 mt-2 dark:text-white">Website :</dt>
+                                        <dd class="md:col-span-8 col-span-7 mt-2 text-slate-400">www.yourdomain.com</dd>
+
+                                        <dt class="md:col-span-4 col-span-5 mt-2 dark:text-white">Location :</dt>
+                                        <dd class="md:col-span-8 col-span-7 mt-2 text-slate-400">3/2/64 Mongus Street, UK</dd>
+                                    </dl>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container lg:mt-24 mt-16">
+            <div class="grid grid-cols-1 text-center">
+                <h3 class="mb-6 md:text-2xl text-xl font-medium dark:text-white">Have Question ? Get in touch!</h3>
+
+                <p class="text-slate-400 max-w-xl mx-auto">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
+            
+                <div class="mt-6">
+                    <a href="/contactus" class="py-2 px-5 inline-block font-normal tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-blue-600 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white rounded-md"><i class="uil uil-phone align-middle me-2"></i> Contact us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer/>
+</Layout>

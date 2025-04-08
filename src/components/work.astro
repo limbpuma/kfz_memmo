@@ -1,0 +1,49 @@
+---
+import { workData, sectionHeaders } from "../data";
+import { Image } from 'astro:assets';
+---
+
+<div class="container md:mt-24 mt-16">
+  <div class="grid grid-cols-1 pb-8 text-center">
+    <h6 class="text-blue-600 text-base font-medium uppercase mb-2">{sectionHeaders.work.title}</h6>
+    <h3 class="mb-4 md:text-2xl text-xl font-medium dark:text-white">{sectionHeaders.work.subtitle}</h3>
+    <p class="text-slate-400 max-w-xl mx-auto">{sectionHeaders.work.text}</p>
+  </div>
+
+  <div class="relative mt-8">
+    <!-- Línea central -->
+    <div class="timeline border-gray-200 md:absolute h-full left-1/2 transform -translate-x-1/2"></div>
+
+    <div class="space-y-12 relative">
+      {workData.map((item, index) => (
+        <div class="flex flex-col sm:flex-row items-center relative w-full">
+
+          <!-- Imagen -->
+          <div class={`w-full sm:w-1/2 px-6 flex ${index % 2 === 0 ? 'justify-end sm:order-1' : 'justify-start sm:order-2 sm:text-right'}`}>
+            <Image
+              src={item.image}
+              alt={item.alt}
+              class="rounded-lg shadow-lg object-cover max-w-[90%] sm:max-w-[320px]"
+              width={400}
+              height={300}
+              format="webp"
+              quality={85}
+            />
+          </div>
+
+          <!-- Punto central -->
+          <div class="absolute left-1/2 transform -translate-x-1/2">
+            <span class="block bg-blue-600 size-4 rounded-full ring-4 ring-white dark:ring-slate-900"></span>
+          </div>
+
+          <!-- Texto -->
+          <div class={`w-full sm:w-1/2 px-6 mt-6 sm:mt-0 ${index % 2 === 0 ? 'sm:order-2 sm:text-left' : 'sm:order-1 sm:text-right'}`}>
+            <h5 class="text-lg font-medium dark:text-white hover:text-blue-500 dark:hover:text-blue-500 transition-all duration-500 ease-in-out">{item.title}</h5>
+            <p class="text-slate-500 dark:text-slate-400 mt-2">{item.description}</p>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
