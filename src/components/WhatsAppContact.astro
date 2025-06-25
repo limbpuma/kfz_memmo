@@ -130,13 +130,22 @@
     const closeForm = document.getElementById('close-form');
     const contactForm = document.getElementById('whatsapp-contact-form');
 
-    if (!whatsappBtn || !whatsappForm || !closeForm || !contactForm) return;
+    if (!whatsappBtn || !whatsappForm || !closeForm || !contactForm) {
+      console.log('WhatsApp elements not found');
+      return;
+    }
+
+    console.log('WhatsApp widget initialized');
 
     // WhatsApp Business number (replace with actual number)
     const whatsappNumber = '4915757057121'; // Without + and spaces
 
     // Toggle form visibility
-    whatsappBtn.addEventListener('click', () => {
+    whatsappBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('WhatsApp button clicked');
+      
       whatsappForm.classList.toggle('hidden');
       if (!whatsappForm.classList.contains('hidden')) {
         whatsappForm.style.animation = 'slideInRight 0.3s ease-out';
@@ -144,7 +153,9 @@
     });
 
     // Close form
-    closeForm.addEventListener('click', () => {
+    closeForm.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       whatsappForm.classList.add('hidden');
     });
 
@@ -300,8 +311,15 @@
   }
 
   // Initialize on page load and on view transitions
-  document.addEventListener('DOMContentLoaded', initWhatsAppWidget);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhatsAppWidget);
+  } else {
+    initWhatsAppWidget();
+  }
   document.addEventListener('astro:page-load', initWhatsAppWidget);
+  
+  // Also try to initialize immediately in case script loads after DOM
+  setTimeout(initWhatsAppWidget, 100);
 </script>
 
 <style>
