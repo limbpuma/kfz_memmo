@@ -9,59 +9,371 @@ interface ClientData{
 }
 ---
 
-<div class="container">
-    <div class="grid grid-cols-1 pb-8 text-center">
-        <h6 class="mb-2 text-base font-medium text-green-600 uppercase">{sectionHeaders.client.title}</h6>
-        <h3 class="mb-4 text-xl font-medium md:text-2xl dark:text-white">{sectionHeaders.client.subtitle}</h3>
-
-        <p class="max-w-xl mx-auto text-slate-400">{sectionHeaders.client.text}</p>
+<div class="container px-4 mx-auto">
+    <!-- Header Section -->
+    <div class="pb-8 mb-8 text-center">
+        <h6 class="mb-2 text-base font-medium tracking-wider text-green-600 uppercase">{sectionHeaders.client.title}</h6>
+        <h3 class="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl dark:text-white">{sectionHeaders.client.subtitle}</h3>
+        <p class="max-w-2xl mx-auto text-lg leading-relaxed text-slate-600 dark:text-slate-400">{sectionHeaders.client.text}</p>
     </div>
-    
-    <div class="relative grid grid-cols-1 mt-8">
-        <div class="tiny-two-item">
-            {clientData.map((item:ClientData)=>( 
-                <div class="tiny-slide">
-                    <div class="relative p-6 m-2 overflow-hidden bg-white rounded-md shadow-sm lg:flex lg:p-0 shadow-slate-200 dark:shadow-slate-700 dark:bg-slate-900">
-                        <img class="mx-auto rounded-full size-24 lg:w-48 lg:h-auto lg:rounded-none" src={item.image.src} alt="" width="384" height="512"/>
-                        <div class="pt-6 space-y-4 text-center lg:p-6 lg:text-left">
-                            <p class="text-base text-slate-500 dark:text-slate-200">{item.desc}</p>
-                            
-                            <div>
-                                <span class="block mb-1 text-green-600">{item.name}</span>
-                                <span class="block text-sm text-slate-400 dark:text-white/60">{item.post}</span>
-                            </div>
+
+    <!-- Mobile: Vertical Stack -->
+    <div class="block space-y-6 sm:hidden">
+        {clientData.map((item: ClientData, index) => (
+            <div class="p-6 transition-all duration-300 bg-white border border-gray-100 shadow-lg dark:bg-slate-900 rounded-2xl hover:shadow-xl dark:border-slate-700">
+                <div class="flex flex-col items-center space-y-4 text-center">
+                    <!-- Customer Image -->
+                    <div class="relative">
+                        <img 
+                            class="object-cover w-20 h-20 rounded-full ring-4 ring-green-100 dark:ring-green-900"
+                            src={item.image.src} 
+                            alt={`Kundenfoto ${item.name}`}
+                            loading="lazy"
+                        />
+                        <div class="absolute flex items-center justify-center w-8 h-8 bg-green-500 rounded-full -bottom-2 -right-2">
+                            <i class="text-sm text-white uil uil-quote-right"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Review Content -->
+                    <div class="space-y-3">
+                        <!-- Star Rating -->
+                        <div class="flex justify-center space-x-1">
+                            {[...Array(5)].map((_, i) => (
+                                <i class="text-lg text-yellow-400 uil uil-star"></i>
+                            ))}
+                        </div>
+                        
+                        <!-- Review Text -->
+                        <blockquote class="italic leading-relaxed text-slate-600 dark:text-slate-300">
+                            {item.desc}
+                        </blockquote>
+                        
+                        <!-- Customer Info -->
+                        <div class="pt-3 border-t border-gray-100 dark:border-slate-700">
+                            <h5 class="font-semibold text-gray-900 dark:text-white">{item.name}</h5>
+                            <p class="text-sm font-medium text-green-600 dark:text-green-400">{item.post}</p>
                         </div>
                     </div>
                 </div>
-            ))}
+            </div>
+        ))}
+    </div>
+
+    <!-- Tablet & Desktop: Horizontal Scroll -->
+    <div class="hidden sm:block">
+        <!-- Navigation Buttons -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex space-x-3">
+                <button 
+                    id="scroll-left" 
+                    class="p-3 text-green-600 transition-colors duration-200 bg-green-100 rounded-full shadow-md hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 dark:text-green-400 hover:shadow-lg"
+                    aria-label="Vorherige Bewertungen"
+                >
+                    <i class="text-xl uil uil-angle-left"></i>
+                </button>
+                <button 
+                    id="scroll-right" 
+                    class="p-3 text-green-600 transition-colors duration-200 bg-green-100 rounded-full shadow-md hover:bg-green-200 dark:bg-green-900 dark:hover:bg-green-800 dark:text-green-400 hover:shadow-lg"
+                    aria-label="Nächste Bewertungen"
+                >
+                    <i class="text-xl uil uil-angle-right"></i>
+                </button>
+            </div>
+            
+            <!-- Scroll Indicators -->
+            <div class="flex space-x-2">
+                {clientData.map((_, index) => (
+                    <div 
+                        class={`indicator w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-green-500 w-6' : 'bg-gray-300 dark:bg-gray-600'}`}
+                        data-index={index}
+                    ></div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Horizontal Scroll Container -->
+        <div class="relative overflow-hidden">
+            <div 
+                id="testimonials-container" 
+                class="flex pb-4 space-x-6 overflow-x-auto scrollbar-hide scroll-smooth"
+                style="scroll-snap-type: x mandatory;"
+            >
+                {clientData.map((item: ClientData, index) => (
+                    <div 
+                        class="flex-none w-full p-6 transition-all duration-300 bg-white border border-gray-100 shadow-lg sm:w-80 lg:w-96 dark:bg-slate-900 rounded-2xl hover:shadow-xl dark:border-slate-700 hover:border-green-200 dark:hover:border-green-700 group"
+                        style="scroll-snap-align: start;"
+                        data-testimonial={index}
+                    >
+                        <div class="flex flex-col h-full">
+                            <!-- Header with customer info -->
+                            <div class="flex items-center mb-4 space-x-4">
+                                <div class="relative">
+                                    <img 
+                                        class="object-cover w-16 h-16 transition-all duration-300 rounded-full ring-4 ring-green-100 dark:ring-green-900 group-hover:ring-green-200 dark:group-hover:ring-green-800"
+                                        src={item.image.src} 
+                                        alt={`Kundenfoto ${item.name}`}
+                                        loading="lazy"
+                                    />
+                                    <div class="absolute flex items-center justify-center w-6 h-6 bg-green-500 rounded-full -bottom-1 -right-1">
+                                        <i class="text-xs text-white uil uil-check"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h5 class="font-semibold text-gray-900 transition-colors duration-200 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400">
+                                        {item.name}
+                                    </h5>
+                                    <p class="text-sm font-medium text-green-600 dark:text-green-400">{item.post}</p>
+                                    
+                                    <!-- Star Rating -->
+                                    <div class="flex mt-1 space-x-1">
+                                        {[...Array(5)].map((_, i) => (
+                                            <i class="text-sm text-yellow-400 uil uil-star"></i>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Review Content -->
+                            <div class="flex flex-col justify-between flex-1">
+                                <blockquote class="mb-4 italic leading-relaxed transition-colors duration-200 text-slate-600 dark:text-slate-300 group-hover:text-slate-700 dark:group-hover:text-slate-200">
+                                    {item.desc}
+                                </blockquote>
+                                
+                                <!-- Service Badge -->
+                                <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <span class="text-xs font-medium text-gray-500 dark:text-gray-400">Verifizierte Bewertung</span>
+                                    </div>
+                                    <i class="text-2xl text-green-500 transition-opacity duration-200 uil uil-quote-right opacity-20 group-hover:opacity-40"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Scroll Progress Bar -->
+        <div class="w-full h-1 mt-6 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div id="scroll-progress" class="h-1 transition-all duration-300 bg-green-500 rounded-full" style="width: 20%"></div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="p-8 mt-12 text-center bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900 dark:to-blue-900 rounded-2xl">
+        <h4 class="mb-3 text-xl font-semibold text-gray-800 dark:text-white">
+            Werden Sie unser nächster zufriedener Kunde!
+        </h4>
+        <p class="max-w-2xl mx-auto mb-6 text-gray-600 dark:text-gray-300">
+            Überzeugen Sie sich selbst von unserem professionellen Service und der persönlichen Betreuung.
+        </p>
+        <div class="flex flex-col justify-center gap-4 sm:flex-row">
+            <a href="tel:+4915757057121" class="inline-flex items-center justify-center px-6 py-3 space-x-2 font-medium text-white transition-colors duration-200 bg-green-600 rounded-lg hover:bg-green-700">
+                <i class="uil uil-phone"></i>
+                <span>Jetzt anrufen</span>
+            </a>
+            <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 space-x-2 font-medium text-white transition-colors duration-200 bg-blue-600 rounded-lg hover:bg-blue-700">
+                <i class="uil uil-envelope"></i>
+                <span>Termin vereinbaren</span>
+            </a>
         </div>
     </div>
 </div>
 
+<style>
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Smooth scroll behavior */
+    #testimonials-container {
+        scroll-behavior: smooth;
+    }
+    
+    /* Enhanced focus states for accessibility */
+    button:focus {
+        outline: 2px solid #10b981;
+        outline-offset: 2px;
+    }
+    
+    /* Hover effects for testimonial cards */
+    [data-testimonial]:hover {
+        transform: translateY(-4px);
+    }
+    
+    /* Animation for indicators */
+    .indicator {
+        cursor: pointer;
+    }
+    
+    .indicator:hover {
+        transform: scale(1.2);
+    }
+</style>
+
 <script>
-import { tns } from 'tiny-slider';
-
-  if(document.getElementsByClassName('tiny-two-item').length > 0) {
-    var slider = tns({
-        container: '.tiny-two-item',
-        controls: true,
-        mouseDrag: true,
-        loop: true,
-        rewind: true,
-        autoplay: true,
-        autoplayButtonOutput: false,
-        autoplayTimeout: 3000,
-        navPosition: "bottom",
-        controlsText: ['<i class="mdi mdi-chevron-left "></i>', '<i class="mdi mdi-chevron-right"></i>'],
-        nav: false,
-        speed: 400,
-        gutter: 0,
-        responsive: {
-            768: {
-                items: 2
-            },
-        },
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('testimonials-container') as HTMLElement | null;
+    const leftBtn = document.getElementById('scroll-left') as HTMLButtonElement | null;
+    const rightBtn = document.getElementById('scroll-right') as HTMLButtonElement | null;
+    const progressBar = document.getElementById('scroll-progress') as HTMLElement | null;
+    const indicators = document.querySelectorAll('.indicator') as NodeListOf<HTMLElement>;
+    
+    if (!container || !leftBtn || !rightBtn) return;
+    
+    let currentIndex = 0;
+    const testimonials = container.querySelectorAll('[data-testimonial]') as NodeListOf<HTMLElement>;
+    const totalTestimonials = testimonials.length;
+    
+    // Calculate scroll distance based on card width
+    function getScrollDistance(): number {
+        const containerWidth = container!.clientWidth;
+        const cardWidth = testimonials[0]?.clientWidth || 320;
+        const gap = 24; // 6 * 4px (space-x-6)
+        return cardWidth + gap;
+    }
+    
+    // Update indicators
+    function updateIndicators(index: number): void {
+        indicators.forEach((indicator, i) => {
+            if (i === index) {
+                indicator.className = 'indicator w-6 h-2 rounded-full bg-green-500 transition-all duration-300';
+            } else {
+                indicator.className = 'indicator w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-300';
+            }
+        });
+    }
+    
+    // Update progress bar
+    function updateProgress(): void {
+        if (!container || !progressBar) return;
+        const scrollLeft = container.scrollLeft;
+        const scrollWidth = container.scrollWidth - container.clientWidth;
+        const progress = (scrollLeft / scrollWidth) * 100;
+        progressBar.style.width = `${Math.max(20, progress)}%`;
+    }
+    
+    // Scroll to specific index
+    function scrollToIndex(index: number): void {
+        if (!container) return;
+        const scrollDistance = getScrollDistance();
+        container.scrollTo({
+            left: scrollDistance * index,
+            behavior: 'smooth'
+        });
+        currentIndex = index;
+        updateIndicators(index);
+    }
+    
+    // Left button click
+    leftBtn.addEventListener('click', () => {
+        currentIndex = Math.max(0, currentIndex - 1);
+        scrollToIndex(currentIndex);
     });
-};
+    
+    // Right button click
+    rightBtn.addEventListener('click', () => {
+        currentIndex = Math.min(totalTestimonials - 1, currentIndex + 1);
+        scrollToIndex(currentIndex);
+    });
+    
+    // Indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            scrollToIndex(index);
+        });
+    });
+    
+    // Update progress on scroll
+    container.addEventListener('scroll', updateProgress);
+    
+    // Touch/mouse drag support
+    let isDown = false;
+    let startX: number;
+    let scrollLeftStart: number;
+    
+    container.addEventListener('mousedown', (e: MouseEvent) => {
+        isDown = true;
+        startX = e.pageX - container!.offsetLeft;
+        scrollLeftStart = container!.scrollLeft;
+        container!.style.cursor = 'grabbing';
+    });
+    
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        if (container) container.style.cursor = 'grab';
+    });
+    
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        if (container) container.style.cursor = 'grab';
+    });
+    
+    container.addEventListener('mousemove', (e: MouseEvent) => {
+        if (!isDown || !container) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeftStart - walk;
+    });
+    
+    // Keyboard navigation
+    container.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            leftBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            rightBtn.click();
+        }
+    });
+    
+    // Auto-scroll (optional)
+    let autoScrollInterval: number | undefined;
+    
+    function startAutoScroll(): void {
+        autoScrollInterval = window.setInterval(() => {
+            if (currentIndex >= totalTestimonials - 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            scrollToIndex(currentIndex);
+        }, 5000);
+    }
+    
+    function stopAutoScroll(): void {
+        if (autoScrollInterval) {
+            window.clearInterval(autoScrollInterval);
+        }
+    }
+    
+    // Start auto-scroll and pause on hover
+    startAutoScroll();
+    container.addEventListener('mouseenter', stopAutoScroll);
+    container.addEventListener('mouseleave', startAutoScroll);
+    
+    // Initial setup
+    updateIndicators(0);
+    updateProgress();
+    if (container) container.style.cursor = 'grab';
+    
+    // Resize handler
+    window.addEventListener('resize', () => {
+        updateProgress();
+    });
+});
 
+// Re-initialize on view transitions
+document.addEventListener('astro:page-load', function() {
+    // The script will re-run automatically
+});
 </script>
