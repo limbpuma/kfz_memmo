@@ -1,4 +1,4 @@
-// WhatsApp Widget - Production Version
+// WhatsApp Widget - Production Version with Responsive & Cookie Banner Support
 function initWhatsAppWidget() {
   try {
     const btn = document.getElementById('whatsapp-btn');
@@ -10,6 +10,26 @@ function initWhatsAppWidget() {
       setTimeout(initWhatsAppWidget, 200);
       return;
     }
+
+    // Cookie banner detection and position adjustment
+    function checkCookieBanner() {
+      const cookieBanner = document.querySelector('.cc-banner, .cc-window');
+      if (cookieBanner && cookieBanner.style.display !== 'none') {
+        document.body.classList.add('cc-banner-active');
+      } else {
+        document.body.classList.remove('cc-banner-active');
+      }
+    }
+
+    // Check cookie banner periodically
+    const cookieCheckInterval = setInterval(checkCookieBanner, 500);
+    
+    // Stop checking after cookie banner is dismissed
+    setTimeout(() => {
+      if (cookieCheckInterval) {
+        clearInterval(cookieCheckInterval);
+      }
+    }, 30000);
     
     // Global toggle function
     window.toggleWhatsApp = function() {
@@ -46,6 +66,34 @@ function initWhatsAppWidget() {
       form.classList.add('hidden');
       form.classList.remove('show');
     };
+
+    // Close form when clicking outside (mobile-friendly)
+    document.addEventListener('click', function(e) {
+      if (form.style.display === 'block' || form.classList.contains('show')) {
+        const widget = document.getElementById('whatsapp-widget');
+        if (widget && !widget.contains(e.target)) {
+          form.style.setProperty('display', 'none', 'important');
+          form.style.setProperty('visibility', 'hidden', 'important');
+          form.style.setProperty('opacity', '0', 'important');
+          form.classList.add('hidden');
+          form.classList.remove('show');
+        }
+      }
+    });
+
+    // Handle screen rotation and resize
+    window.addEventListener('resize', function() {
+      // Force reposition on mobile when rotating
+      if (window.innerWidth <= 640) {
+        checkCookieBanner();
+      }
+    });
+
+    // Touch events for better mobile interaction
+    btn.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      if (window.toggleWhatsApp) window.toggleWhatsApp();
+    });
     
     // Form submission handler
     contactForm.onsubmit = function(e) {
