@@ -169,15 +169,7 @@ catch(err){}
 
 // Typewriter Effect
 (function() {
-    const elements = document.getElementsByClassName('typewrite');
-    for (let i = 0; i < elements.length; i++) {
-      const toRotate = elements[i].getAttribute('data-type');
-      const period = elements[i].getAttribute('data-period');
-      if (toRotate) {
-        new TxtType(elements[i], JSON.parse(toRotate), period);
-      }
-    }
-  
+    // Define TxtType class first
     function TxtType(el, toRotate, period) {
       this.toRotate = toRotate;
       this.el = el;
@@ -185,7 +177,8 @@ catch(err){}
       this.period = parseInt(period, 10) || 2000;
       this.txt = '';
       this.isDeleting = false;
-      this.tick();
+      // Don't call tick immediately, wait for the prototype to be defined
+      setTimeout(() => this.tick(), 0);
     }
   
     TxtType.prototype.tick = function() {
@@ -214,6 +207,16 @@ catch(err){}
       }
   
       setTimeout(() => { this.tick(); }, delta);
+    };
+
+    // Now initialize typewriter elements
+    const elements = document.getElementsByClassName('typewrite');
+    for (let i = 0; i < elements.length; i++) {
+      const toRotate = elements[i].getAttribute('data-type');
+      const period = elements[i].getAttribute('data-period');
+      if (toRotate) {
+        new TxtType(elements[i], JSON.parse(toRotate), period);
+      }
     }
   })();
   
