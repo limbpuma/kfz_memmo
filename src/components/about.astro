@@ -1,35 +1,111 @@
 ---
-import aboutImg from '../assets/images/about.jpg'
+import aboutImg from '../assets/images/team/about_memmo_kfz.png'
 import { aboutUs } from "../data";
 import { Image } from 'astro:assets';
+import Button from '../components/Button.astro';
 ---
 <div class="container relative">
-    <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-2 gap-10 items-center">
+    <div class="grid items-center grid-cols-1 gap-10 lg:grid-cols-12 md:grid-cols-2">
         <div class="lg:col-span-5">
-            <div class="relative bg-black rounded-lg">
+            <div class="relative">
               <Image 
                 src={aboutImg} 
-                alt="Bild über uns" 
-                class="rounded-lg shadow-lg w-full h-auto object-cover inset-0  opacity-80" 
+                alt="KFZ-Service Memmo Werkstatt" 
+                class="object-cover w-full h-auto rounded-lg shadow-lg" 
                 width={600} 
                 height={400}
                 format="webp"
                 quality={85}
               />
               
+              <!-- Certification Badge -->
+              <div class="absolute bottom-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                <div class="flex items-center space-x-2">
+                  <i class="uil uil-award text-xl"></i>
+                  <div class="text-sm">
+                    <div class="font-semibold">Kfz-Meisterbetrieb</div>
+                    <div class="text-green-100">Zertifiziert</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
         <div class="lg:col-span-7">
             <div class="lg:ms-7">
-                <h6 class="text-blue-600 text-base font-medium uppercase mb-2">{aboutUs.title}</h6>
-                <h3 class="mb-4 md:text-2xl text-xl font-medium dark:text-white">{aboutUs.subtitle}</h3>
+                <h6 class="mb-2 text-base font-medium text-green-600 uppercase">{aboutUs.title}</h6>
+                <h3 class="mb-4 text-xl font-medium md:text-2xl dark:text-white">{aboutUs.subtitle}</h3>
 
-                <p class="text-slate-400 max-w-2xl">{aboutUs.description}</p>
+                <p class="mb-6 text-slate-400">{aboutUs.description}</p>
+
+                <!-- Key Features Grid -->
+                <div class="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2">
+                  
+                  <!-- Feature 1 -->
+                  <div class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg dark:bg-slate-800">
+                    <div class="p-2 bg-green-100 rounded-lg dark:bg-green-900">
+                      <i class="text-green-600 uil uil-wrench dark:text-green-300"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 dark:text-white">Meisterqualität</h5>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Jahrelange Erfahrung und modernste Technik</p>
+                    </div>
+                  </div>
+
+                  <!-- Feature 2 -->
+                  <div class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg dark:bg-slate-800">
+                    <div class="p-2 bg-blue-100 rounded-lg dark:bg-blue-900">
+                      <i class="text-blue-600 uil uil-clipboard-notes dark:text-blue-300"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 dark:text-white">Sachverständiger</h5>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Unabhängige Gutachten nach Unfällen</p>
+                    </div>
+                  </div>
+
+                  <!-- Feature 3 -->
+                  <div class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg dark:bg-slate-800">
+                    <div class="p-2 bg-purple-100 rounded-lg dark:bg-purple-900">
+                      <i class="text-purple-600 uil uil-clock dark:text-purple-300"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 dark:text-white">24/7 Service</h5>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Notfall- und Abschleppdienst</p>
+                    </div>
+                  </div>
+
+                  <!-- Feature 4 -->
+                  <div class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg dark:bg-slate-800">
+                    <div class="p-2 bg-orange-100 rounded-lg dark:bg-orange-900">
+                      <i class="text-orange-600 uil uil-heart dark:text-orange-300"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-gray-800 dark:text-white">Persönlich</h5>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Individuelle Beratung und Betreuung</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="flex items-center space-x-6 mb-8 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg dark:from-green-900 dark:to-blue-900">
+                  <div class="text-center">
+                    <div class="text-2xl font-bold text-green-600 dark:text-green-400">15+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Jahre Erfahrung</div>
+                  </div>
+                  <div class="w-px h-12 bg-gray-300 dark:bg-gray-600"></div>
+                  <div class="text-center">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">500+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Zufriedene Kunden</div>
+                  </div>
+                  <div class="w-px h-12 bg-gray-300 dark:bg-gray-600"></div>
+                  <div class="text-center">
+                    <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">24/7</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Notfallservice</div>
+                  </div>
+                </div>
             
-                <div class="relative mt-10">
-                    <a href={aboutUs.buttonUrl}  class="inline-block bg-blue-700 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                    >{aboutUs.buttonLabel}</a>
+                <div class="relative mt-6">
+                    <Button label={aboutUs.buttonLabel} href={aboutUs.buttonUrl} width="auto" />
                 </div>
             </div>
         </div>

@@ -2,39 +2,104 @@
 import bgVideo from '../assets/images/bg/cta.webm';
 import { Image } from 'astro:assets';
 import { ctaData } from "../data";
+import Button from '../components/Button.astro';
+
 --- 
  
-<section class="relative py-24 w-full table overflow-hidden">
-  <!-- Imagen optimizada con astro:assets -->
+<section id="cta-section" class="relative table w-full py-24 overflow-hidden">
+  <!-- Video background -->
   <video 
     autoplay 
     muted 
     loop 
     playsinline 
-    class="absolute inset-0 w-full h-full object-cover z-0"
+    class="absolute inset-0 z-0 object-cover w-full h-full"
+    transition:persist
   >
     <source src={bgVideo} type="video/webm" />
-    <!-- Fallback -->
     Your browser does not support the video tag.
   </video>
 
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/60 to-black/40"></div>
 
-  <!-- Filtro oscuro encima del fondo -->
-  <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
-
-  <!-- Contenido CTA -->
+  <!-- Content -->
   <div class="container relative z-20">
-    <div class="grid grid-cols-1 pb-8 text-center">
-      <h3 class="mb-6 md:text-3xl text-2xl text-white font-medium">{ctaData.title}</h3>
-      <p class="text-white opacity-50 max-w-xl mx-auto">{ctaData.description}</p>
+    <div class="grid grid-cols-1 text-center">
+      
+      <!-- Badge -->
+      <div class="flex justify-center mb-6">
+        <div class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-full shadow-lg">
+          <i class="uil uil-shield-check mr-2"></i>
+          <span class="text-sm font-semibold">ZERTIFIZIERTES SACHVERSTÄNDIGENBÜRO</span>
+        </div>
+      </div>
 
-      <div class="relative mt-10">
-        <a 
-          href={ctaData.buttonUrl} 
-          class="inline-block bg-blue-700 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600"
-        >
-          {ctaData.buttonLabel}
+      <!-- Main heading -->
+      <h3 class="mb-6 text-3xl font-bold text-white md:text-4xl lg:text-5xl leading-tight">
+        {ctaData.title}
+      </h3>
+      
+      <!-- Description -->
+      <p class="max-w-3xl mx-auto text-lg text-white/90 mb-8 leading-relaxed">
+        {ctaData.description}
+      </p>
+
+      <!-- Features grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
+        
+        <!-- Feature 1 -->
+        <div class="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+          <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4">
+            <i class="uil uil-file-check-alt text-2xl text-white"></i>
+          </div>
+          <h4 class="text-white font-semibold mb-2">Rechtssicher</h4>
+          <p class="text-white/80 text-sm text-center">Gerichtsfeste Gutachten nach höchsten Standards</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+          <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4">
+            <i class="uil uil-clock text-2xl text-white"></i>
+          </div>
+          <h4 class="text-white font-semibold mb-2">Schnell</h4>
+          <p class="text-white/80 text-sm text-center">Gutachten innerhalb von 24-48 Stunden</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+          <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-4">
+            <i class="uil uil-balance-scale text-2xl text-white"></i>
+          </div>
+          <h4 class="text-white font-semibold mb-2">Unabhängig</h4>
+          <p class="text-white/80 text-sm text-center">Objektive Bewertung ohne Interessenkonflikt</p>
+        </div>
+      </div>
+
+      <!-- Call to action buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <Button label={ctaData.buttonLabel} href={ctaData.buttonUrl} width="fit" />
+        
+        <a href="tel:+4915757057121" class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl space-x-2">
+          <i class="uil uil-phone"></i>
+          <span>Sofort anrufen</span>
         </a>
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="mt-10 flex flex-wrap justify-center items-center gap-8 text-white/70">
+        <div class="flex items-center space-x-2">
+          <i class="uil uil-award text-yellow-400"></i>
+          <span class="text-sm">15+ Jahre Erfahrung</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <i class="uil uil-users-alt text-blue-400"></i>
+          <span class="text-sm">500+ Gutachten erstellt</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <i class="uil uil-check-circle text-green-400"></i>
+          <span class="text-sm">100% Kundenzufriedenheit</span>
+        </div>
       </div>
     </div>
   </div>

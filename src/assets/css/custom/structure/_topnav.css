@@ -2,23 +2,23 @@
 /*             Menu              */
 /*===============================*/
 .navbar {
-  @apply fixed top-0 start-0 end-0 z-999 bg-transparent py-0 transition-all duration-500 font-rubik;
+  @apply fixed top-0 py-0 transition-all duration-500 bg-transparent start-0 end-0 z-999 font-rubik;
   .navigation {
       @apply w-full m-0;
       .navbar-nav {
-          @apply mt-4 flex flex-row overflow-y-scroll h-24;
+          @apply flex flex-row h-24 mt-4 overflow-y-scroll;
           .nav-link {
-              @apply block p-3 text-slate-900 hover:text-blue-600 dark:text-white/60 dark:hover:text-white;
+              @apply block p-3 text-slate-900 hover:text-green-600 dark:text-white/60 dark:hover:text-white;
           }
           .active {
               .nav-link {
-                  @apply text-blue-600 dark:text-white;
+                  @apply text-green-600 dark:text-white;
               }
           }
       }
   }
   .navbar-brand {
-      @apply me-12 p-0;
+      @apply p-0;
       .l-dark,
       .logo-dark-mode {
           @apply hidden;
@@ -54,7 +54,7 @@
       }
   }
   &.is-sticky {
-      @apply bg-white dark:bg-slate-900 shadow-sm dark:shadow-slate-800;
+      @apply bg-white shadow-sm dark:bg-slate-900 dark:shadow-slate-800;
       .navbar-brand {
           .l-dark {
               @apply inline-block;
@@ -88,7 +88,7 @@
 
                 &.nav-light {
                     .nav-link {
-                        @apply block p-3 text-white/60 hover:text-white;
+                        @apply block p-3 text-white/80 hover:text-white;
                         &.active{
                             @apply text-white;
                         }
@@ -98,6 +98,7 @@
                             @apply text-white;
                         }
                     }
+                    
                 }
             }
         }
@@ -113,25 +114,25 @@
                 .nav-link {
                     @apply text-slate-900 dark:text-white/60;
                     &.active {
-                        @apply text-blue-600 dark:text-white;
+                        @apply text-green-600 dark:text-white;
                     }
                 }
                 .active {
                     .nav-link {
-                        @apply text-blue-600;
+                        @apply text-green-600;
                     }
                 }
 
                 &.nav-light {
                     .nav-link {
-                        @apply text-slate-900 hover:text-blue-600 dark:text-white/60 dark:hover:text-white;
+                        @apply text-slate-900 hover:text-green-600 dark:text-white/60 dark:hover:text-white;
                         &.active {
-                            @apply text-blue-600;
+                            @apply text-green-600;
                         }
                     }
                     .active {
                         .nav-link {
-                            @apply text-blue-600 dark:text-white;
+                            @apply text-green-600 dark:text-white;
                         }
                     }
                 }
@@ -147,11 +148,11 @@
           .navbar-nav {
               @apply block h-[21.25rem];
               .nav-link {
-                  @apply text-slate-900 hover:text-blue-600 dark:text-white/60 dark:hover:text-white;
+                  @apply text-slate-900 hover:text-green-600 dark:text-white/60 dark:hover:text-white;
               }
               .active {
                   .nav-link {
-                      @apply text-blue-600;
+                      @apply text-green-600;
                   }
               }
               .menu-social {
@@ -168,7 +169,7 @@
 
 /* Configuración para esconder completamente el BeforeNavbar cuando el Navbar se vuelve sticky */
 .navbar.is-sticky .before-navbar {
-    @apply opacity-0 invisible absolute;
+    @apply absolute invisible opacity-0;
     height: 0; /* Asegura que no ocupe espacio */
 }
 
@@ -184,7 +185,7 @@
 
 /* Estilo adicional para mantener la coherencia visual al cambiar de estado */
 .navbar.is-sticky {
-    @apply bg-white dark:bg-slate-900 shadow-md; /* Añade sombra para destacar el navbar en modo sticky */
+    @apply bg-white shadow-md dark:bg-slate-900; /* Añade sombra para destacar el navbar en modo sticky */
 }
 
 

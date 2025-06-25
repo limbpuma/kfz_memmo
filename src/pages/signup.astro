@@ -8,44 +8,44 @@ const year = new Date().getFullYear()
 <Layout>
     <section class="position-relative bg-[url('../../assets/images/bg/auth.jpg')] bg-center bg-cover">
         <div class="absolute inset-0 bg-black opacity-90"></div>
-        <div class="container-fluid relative">
+        <div class="relative container-fluid">
             <div class="grid grid-cols-1">
                 <div class="lg:col-span-4">
-                    <div class="flex flex-col min-h-screen md:px-12 py-12 px-3">
-                        <div class="text-center mx-auto">
+                    <div class="flex flex-col min-h-screen px-3 py-12 md:px-12">
+                        <div class="mx-auto text-center">
                             <a href="/"><img src={logo.src} alt=""/></a>
                         </div>
 
-                        <div class="text-center my-auto">
-                            <div class="w-full max-w-sm m-auto px-6 py-8 bg-white dark:bg-slate-900 rounded-md shadow-lg shadow-slate-500 dark:shadow-slate-800">
+                        <div class="my-auto text-center">
+                            <div class="w-full max-w-sm px-6 py-8 m-auto bg-white rounded-md shadow-lg dark:bg-slate-900 shadow-slate-500 dark:shadow-slate-800">
                                 <div class="grid grid-cols-1">
-                                    <h5 class="mb-8 text-xl dark:text-white font-semibold">Signup</h5>
+                                    <h5 class="mb-8 text-xl font-semibold dark:text-white">Signup</h5>
                                     <form class="ltr:text-left rtl:text-right">
                                         <div class="grid grid-cols-1">
                                             <div class="mb-4">
                                                 <label class="dark:text-white" for="RegisterName">Your Name:</label>
-                                                <input id="RegisterName" type="text" class="form-input w-full py-2 px-3 border border-gray-200 dark:border-gray-800 focus:ring-0 focus:border-blue-600/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-3" placeholder="Harry">
+                                                <input id="RegisterName" type="text" class="w-full h-10 px-3 py-2 mt-3 border border-gray-200 rounded outline-none form-input dark:border-gray-800 focus:ring-0 focus:border-blue-600/50 dark:bg-slate-900 dark:text-slate-200" placeholder="Harry">
                                             </div>
 
                                             <div class="mb-4">
                                                 <label class="dark:text-white" for="LoginEmail">Email Address:</label>
-                                                <input id="LoginEmail" type="email" class="form-input w-full py-2 px-3 border border-gray-200 dark:border-gray-800 focus:ring-0 focus:border-blue-600/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-3" placeholder="name@example.com">
+                                                <input id="LoginEmail" type="email" class="w-full h-10 px-3 py-2 mt-3 border border-gray-200 rounded outline-none form-input dark:border-gray-800 focus:ring-0 focus:border-blue-600/50 dark:bg-slate-900 dark:text-slate-200" placeholder="name@example.com">
                                             </div>
 
                                             <div class="mb-4">
                                                 <label class="dark:text-white" for="LoginPassword">Password:</label>
-                                                <input id="LoginPassword" type="password" class="form-input w-full py-2 px-3 border border-gray-200 dark:border-gray-800 focus:ring-0 focus:border-blue-600/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-3" placeholder="Password:">
+                                                <input id="LoginPassword" type="password" class="w-full h-10 px-3 py-2 mt-3 border border-gray-200 rounded outline-none form-input dark:border-gray-800 focus:ring-0 focus:border-blue-600/50 dark:bg-slate-900 dark:text-slate-200" placeholder="Password:">
                                             </div>
 
                                             <div class="mb-4">
                                                 <div class="flex items-center mb-0">
-                                                    <input class="form-checkbox size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-blue-600 checked:appearance-auto dark:accent-blue-600 focus:border-orange-300 focus:ring focus:ring-offset-0 focus:ring-orange-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="AcceptT&C">
-                                                    <label class="form-checkbox-label text-slate-400" for="AcceptT&C">I Accept <a href="" class="text-blue-600">Terms And Condition</a></label>
+                                                    <input class="border border-gray-200 rounded appearance-none form-checkbox size-4 dark:border-gray-800 accent-blue-600 checked:appearance-auto dark:accent-blue-600 focus:border-orange-300 focus:ring focus:ring-offset-0 focus:ring-orange-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="AcceptT&C">
+                                                    <label class="form-checkbox-label text-slate-400" for="AcceptT&C">I Accept <a href="" class="text-green-600">Terms And Condition</a></label>
                                                 </div>
                                             </div>
 
                                             <div class="mb-4">
-                                                <a href="" class="btn bg-blue-400 hover:bg-blue-700 border-blue-600 hover:border-blue-700 text-white rounded-md w-full">Register</a>
+                                                <a href="" class="w-full text-white bg-green-400 border-blue-600 rounded-md btn hover:bg-green-700 hover:border-blue-700">Register</a>
                                             </div>
 
                                             <div class="text-center">
@@ -58,7 +58,7 @@ const year = new Date().getFullYear()
                         </div>
 
                         <div class="text-center">
-                            <p class="text-gray-400">© {year} deniz. Design with <i class="mdi mdi-heart text-blue-700"></i> by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                            <p class="text-gray-400">© {year} deniz. Design with <i class="text-green-700 mdi mdi-heart"></i> by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
                         </div>
                     </div>
                 </div>

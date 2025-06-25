@@ -1,0 +1,81 @@
+---
+// agb.astro
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import LegalLayout from '../layouts/LegalLayout.astro';
+---
+---
+
+<LegalLayout>
+
+  <section class="relative py-24 md:py-32 bg-gray-50 dark:bg-slate-800 min-h-[60vh]">
+    <div class="container">
+      <h1 class="mb-10 text-3xl font-bold text-center dark:text-white">Datenschutzerklärung</h1>
+      <div class="max-w-3xl mx-auto prose dark:prose-invert text-slate-700 dark:text-slate-300">
+
+        <p><strong>1. Verantwortlicher</strong></p>
+        <p>
+          Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br />
+          Mehmet Memmo<br />
+          KFZ-Service Memmo<br />
+          Eberstraße 12<br />
+          44145 Dortmund<br />
+          E-Mail: <a href="mailto:m.dmli@web.de">m.dmli@web.de</a>
+        </p>
+
+        <p><strong>2. Erhebung und Speicherung personenbezogener Daten sowie Art und Zweck von deren Verwendung</strong></p>
+        <p>
+          Beim Besuch dieser Website werden durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles gespeichert, die Ihr Browser automatisch übermittelt. Dazu gehören:
+        </p>
+        <ul>
+          <li>IP-Adresse</li>
+          <li>Datum und Uhrzeit der Anfrage</li>
+          <li>Zeitzonendifferenz zur GMT</li>
+          <li>Inhalt der Anforderung (konkrete Seite)</li>
+          <li>Zugriffsstatus/HTTP-Statuscode</li>
+          <li>Jeweils übertragene Datenmenge</li>
+          <li>Website, von der die Anforderung kommt</li>
+          <li>Browsertyp und Betriebssystem</li>
+        </ul>
+        <p>Diese Daten sind nicht bestimmten Personen zuordenbar und werden auch nicht mit Daten aus anderen Quellen zusammengeführt.</p>
+
+        <p><strong>3. Ihre Rechte</strong></p>
+        <p>
+          Sie haben das Recht:
+        </p>
+        <ul>
+          <li>gemäß Art. 15 DSGVO Auskunft über Ihre verarbeiteten personenbezogenen Daten zu verlangen,</li>
+          <li>gemäß Art. 16 DSGVO unverzüglich die Berichtigung unrichtiger oder Vervollständigung Ihrer bei uns gespeicherten Daten zu verlangen,</li>
+          <li>gemäß Art. 17 DSGVO die Löschung Ihrer gespeicherten Daten zu verlangen, soweit nicht gesetzliche Aufbewahrungspflichten bestehen,</li>
+          <li>gemäß Art. 18 DSGVO die Einschränkung der Verarbeitung zu verlangen,</li>
+          <li>gemäß Art. 20 DSGVO Ihre Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten,</li>
+          <li>gemäß Art. 77 DSGVO sich bei einer Aufsichtsbehörde zu beschweren.</li>
+        </ul>
+
+        <p><strong>4. Cookies</strong></p>
+        <p>Unsere Website verwendet technisch notwendige Cookies, um grundlegende Funktionen zu ermöglichen. Eine weitergehende Nutzung erfolgt nur mit Ihrer Einwilligung.</p>
+
+        <p><strong>5. Kontaktformular</strong></p>
+        <p>Wenn Sie uns per Formular kontaktieren, werden Ihre Angaben zwecks Bearbeitung der Anfrage sowie für mögliche Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+
+        <p><strong>6. Google Maps</strong></p>
+        <p>
+          Diese Website nutzt Google Maps zur Darstellung interaktiver Karten. Beim Aufruf der Seite mit einer eingebetteten Karte wird Ihre IP-Adresse an Google übertragen.
+        </p>
+        <p>
+          Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Näheres entnehmen Sie bitte der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
+        </p>
+
+        <p><strong>7. SSL- bzw. TLS-Verschlüsselung</strong></p>
+        <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL-bzw. TLS-Verschlüsselung.</p>
+
+      </div>
+
+      <div class="mt-12 text-center">
+        <Button label="← Zurück zur Startseite" href="/" width="fit" />
+      </div>
+    </div>
+  </section>
+
+</LegalLayout>

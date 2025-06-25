@@ -1,0 +1,102 @@
+---
+// src/pages/blog/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { blogData } from '../../data';
+import { fade } from 'astro:transitions';
+import { Image } from 'astro:assets';
+import Button from '../../components/Button.astro';
+
+
+export async function getStaticPaths() {
+  return blogData.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = blogData.find((p) => p.slug === slug);
+if (!post) throw new Error(`Post "${slug}" nicht gefunden`);
+---
+<Layout>
+  <Navbar />
+
+  <!-- Hero -->
+  <section
+    class="py-28 relative bg-[url('../../assets/images/bg/auth.jpg')] bg-top bg-no-repeat"
+  >
+    <div class="absolute inset-0 bg-slate-950/80"></div>
+    <div class="container relative">
+      <h1 class="text-4xl font-bold text-center text-white">
+        {post.title}
+      </h1>
+      <p class="mt-4 text-center text-white/70">
+        <strong>{post.date}</strong> • ca. <strong>8 Min Lesedauer</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 md:py-24">
+    <div class="container space-y-12">
+      <!-- Bild -->
+      <Image
+        src={post.image}
+        alt={post.title}
+        class="object-cover w-full h-auto rounded-lg shadow-md"
+        transition:name={`${post.slug}-image`}
+        width={800}
+        height={450}
+      />
+
+      <!-- Artikel -->
+      <article class="space-y-8 prose dark:prose-invert max-w-none">
+        <p class="text-lg">
+          <strong>Hinweis:</strong> {post.desc2}
+        </p>
+
+        <div set:html={post.content} />
+
+        <!-- Werkstatt-Info -->
+        <section class="p-6 bg-gray-100 rounded-lg dark:bg-gray-800">
+          <h2 class="mb-4 text-2xl font-semibold">Werkstatt-Info</h2>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <i class="mr-2 text-xl text-green-600 uil uil-map-marker"></i>
+              <span><strong>Adresse:</strong> Evinger Straße 120, 44145 Dortmund</span>
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-xl text-green-600 uil uil-clock"></i>
+              <span><strong>Öffnungszeiten:</strong> Mo–Fr 8–18 Uhr</span>
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-xl text-green-600 uil uil-phone"></i>
+              <span><strong>Telefon:</strong> 0231 1234567</span>
+            </li>
+            <li class="flex items-center">
+              <i class="mr-2 text-xl text-green-600 uil uil-envelope"></i>
+              <span><strong>E-Mail:</strong> info@memmo-kfz.de</span>
+            </li>
+          </ul>
+        </section>
+        
+       
+      </article>
+      
+      
+
+      <!-- Zurück zum Blog-Teaser -->
+      <div class="text-center">
+        <Button
+          label="← Zurück zu News & Tipps"
+          href="/#blog"
+          width="fit"
+          rel="prefetch"
+        />
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</Layout>

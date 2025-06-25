@@ -1,38 +1,57 @@
 ---
 import { footerData } from "../data";
-import logoLight from "../assets/images/logo-light.png";
+import logoDark from '../assets/images/logo-dark.png';
+import logoLight from '../assets/images/logo-light.png';
 import { Image } from 'astro:assets';
 ---
 
 <footer class="py-6 bg-slate-800 dark:bg-gray-900">
     <div class="container">
-        <div class="grid md:grid-cols-12 items-center">
-            <div class="md:col-span-3 mx-auto">
+        <div class="grid items-center md:grid-cols-12">
+            <div class="mx-auto md:col-span-3">
                 
             </span>
-            <a href="/" class="logo-footer block text-center md:text-left">
-              <Image 
-                src={logoLight} 
-                alt="DENIZ KFZ Logo Light" 
-                class="h-12 w-auto mx-auto md:mx-0 drop-shadow-lg brightness-110 transition-transform duration-300 ease-in-out scale-[.95] hover:scale-100"
-                format="png"
-              /><span class="text-slate-400 text-sm mt-2 ml-4">DENIZ KFZ</span>
-            </a>
+            <a class="relative inline-block text-center navbar-brand md:mr-0" href="/">
+                <div class="relative flex items-center justify-center w-fit">
+                  <!-- Modo claro -->
+                  <span class="inline-block dark:hidden">
+                    <Image 
+                      src={logoDark} 
+                      alt="KFZ-Service Memmo Logo Light" 
+                      class="w-auto h-16 transition-transform duration-300 ease-in-out hover:scale-105" 
+                      format="png"
+                    />
+                  </span>
+                  <!-- Modo oscuro -->
+                  <span class="hidden dark:inline-block">
+                    <Image 
+                      src={logoLight} 
+                      alt="KFZ-Service Memmo Logo Dark" 
+                      class="w-auto h-16 transition-transform duration-300 ease-in-out hover:scale-105" 
+                      format="png"
+                    />
+                  </span>
+                  <!-- Texto MEMMO dentro del logo -->
+                  <span class="absolute bottom-4 right-4 text-[8px] font-normal uppercase tracking-widest text-white dark:text-yellow-400 pointer-events-none">
+                    MEMMO
+                  </span>
+                </div>
+              </a>
           </div>
 
-            <div class="md:col-span-5 md:mt-0 mt-8">
+            <div class="mt-8 md:col-span-5 md:mt-0">
                 <div class="text-center">
-                    <p class="text-gray-400">© {footerData.year}. {footerData.copyrightText} <i class="mdi mdi-heart text-blue-700"></i> by <a href={footerData.designerLink.url} target="_blank" class="text-reset">{footerData.designerLink.text}</a>.</p>
+                    <p class="text-gray-400">© {footerData.year}. {footerData.copyrightText} <i class="text-green-700 mdi mdi-heart"></i> by <a href={footerData.designerLink.url} target="_blank" class="text-reset">{footerData.designerLink.text}</a>.</p>
                 </div>
             </div>
 
-            <div class="md:col-span-4 md:mt-0 mt-8">
-                <ul class="list-none foot-icon ltr:md:text-right text-center flex flex-col md:flex-row items-center justify-center ">
+            <div class="mt-8 md:col-span-4 md:mt-0">
+                <ul class="flex flex-col items-center justify-center text-center list-none foot-icon ltr:md:text-right md:flex-row ">
                     {footerData.links.map(link => (
-                        <li class="inline"><a href={link.url} class="text-gray-400 hover:text-white mx-2">{link.title}</a></li>
+                        <li class="inline"><a href={link.url} class="mx-2 text-gray-400 hover:text-white">{link.title}</a></li>
                     ))}
                     {footerData.socialLinks.map(social => (
-                        <li class="inline"><a href={social.url} target="_blank" class="btn btn-icon btn-sm border rounded-md border-slate-700 dark:border-slate-800 mx-auto hover:border-blue-600 bg-slate-800 dark:bg-gray-900 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-400 hover:text-white"><i class={social.iconClass} title={social.title}></i></a></li>
+                        <li class="inline"><a href={social.url} target="_blank" class="mx-auto text-gray-400 border rounded-md btn btn-icon btn-sm border-slate-700 dark:border-slate-800 hover:border-blue-600 bg-slate-800 dark:bg-gray-900 hover:bg-green-600 dark:hover:bg-green-600 hover:text-white"><i class={social.iconClass} title={social.title}></i></a></li>
                     ))}
                 </ul>
             </div>

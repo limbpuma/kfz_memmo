@@ -1,13 +1,14 @@
 ---
+// src/components/Counter.astro
 import { counterData } from "../data";
 ---
 
 <div class="container mt-12">
-  <div class="grid grid-cols-2 md:grid-cols-4">
+  <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
     {counterData.map(({ target, symbol, title }) => (
-      <div class="counter-box position-relative text-center">
-        <h3 class="font-medium text-3xl mb-2 dark:text-white">
-          <span class="counter-value" data-target={target}>0</span>{symbol}
+      <div class="relative text-center counter-box">
+        <h3 class="mb-2 text-3xl font-medium dark:text-white">
+          <span class="counter-value">{target}</span>{symbol}
         </h3>
         <span class="counter-head text-slate-400">{title}</span>
       </div>

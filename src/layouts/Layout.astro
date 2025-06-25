@@ -1,18 +1,21 @@
 ---
 import '../assets/css/tailwind.css'
 import '../../node_modules/tobii/dist/css/tobii.min.css'
-import '../../node_modules/tiny-slider/dist/tiny-slider.css'
 import '../../node_modules/@iconscout/unicons/css/line.css'
-import '../assets/css/materialdesignicons.min.css'
-import Switcher from '../components/switcher.astro'
+import '../assets/css/custom/mechanic-effects.css'
+/*# import '../assets/css/materialdesignicons.min.css' */
 
+import { ViewTransitions } from 'astro:transitions';
+import WhatsAppContact from '../components/WhatsAppContact.astro';
+
+const isHome = Astro.url.pathname === '/';
 ---
 <!doctype html>
-<html lang="en" class="light scroll-smooth" dir="ltr">
+<html lang="en" class="h-full light scroll-smooth" dir="ltr">
 	<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Upwind - Astro Js Landing Page Template</title>
+        <title>kfz_memmo - Astro Js Landing Page Template</title>
         <meta name="description" content="Responsive Tailwind CSS Template">
         <meta name="keywords" content="Onepage, creative, modern, Tailwind CSS, multipurpose, clean">
         <meta name="author" content="Shreethemes">
@@ -23,22 +26,81 @@ import Switcher from '../components/switcher.astro'
         <link href="/favicon.ico" rel="shortcut icon">
       <script src="/js/app.js" defer></script>
       <script src="/js/easy_background.js" defer></script>
-      <script src="/js/plugins.init.js" defer></script>
-      <script src="/js/gumshoe.polyfills.min.js" defer></script>
-      <script src="/js/tiny-slider.js" defer></script>
+      <script src="/js/enhanced-ux.js" defer></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+      <!-- <script src="/js/plugins.init.js" defer></script>-->
+     <script src="/js/gumshoe.polyfills.min.js" defer></script> 
+      <!-- <script src="/js/tiny-slider.js" defer></script>-->
+      <ViewTransitions />
     </head>
     
-	<body class="font-rubik text-base text-slate-900 dark:text-white dark:bg-slate-900">
+	<body class="min-h-screen text-base font-rubik text-slate-900 dark:text-white dark:bg-slate-900">
 		<slot />
-    <Switcher/>
-
+		<WhatsAppContact />
+   <!--  <Switcher/> -->
+    
     <script>
       import Tobii from "tobii";
   
-      document.addEventListener("DOMContentLoaded", function () {
-        new Tobii();
-      });
+  document.addEventListener("DOMContentLoaded", function () {
+    new Tobii();
+  });
 
+
+        // Espera a que la página termine de cargar (ya sea con view-transitions o MPA)
+    document.addEventListener('astro:page-load', () => {
+      const { pathname, hash } = window.location;
+
+      // Sólo nos importa cuando estamos en el Home y hay un hash
+      if (pathname === '/' && hash) {
+        // 1) Desactiva smooth
+        document.documentElement.style.scrollBehavior = 'auto';
+
+        // 2) Haz scroll inmediato al elemento referenciado
+        const target = document.querySelector(hash);
+        if (target) target.scrollIntoView();
+
+        // 3) Restaura smooth tras breve retardo
+        setTimeout(() => {
+          document.documentElement.style.scrollBehavior = 'smooth';
+        }, 100);
+      }
+
+      // Pre-fetch al Home para que la recarga no se note
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = '/';
+      document.head.appendChild(link);
+    });
+
+    
+    window.addEventListener("load", function () {
+      // @ts-ignore
+    window.cookieconsent.initialise({
+      palette: {
+        popup: {
+          background: "#0C502D",
+          text: "#ffffff"
+        },
+        button: {
+          background: "#ECD037",
+          text: "#000000"
+        }
+      },
+      theme: "classic",
+      position: "bottom",
+      content: {
+        message: "Diese Website verwendet Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten.",
+        dismiss: "Verstanden!",
+        link: "Mehr erfahren",
+        href: "/datenschutz"  // Redirige a tu página de Datenschutz
+      }
+    });
+  });
+  
     </script>
 	</body>
 </html>

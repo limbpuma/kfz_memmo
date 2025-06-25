@@ -1,0 +1,26 @@
+---
+import '../assets/css/tailwind.css'
+import '../../node_modules/@iconscout/unicons/css/line.css'
+import '../assets/css/materialdesignicons.min.css'
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
+---
+
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memmo KFZ</title>
+    <link rel="icon" href="/favicon.ico" />
+    <script src="/js/app.js" defer></script>
+    
+    <ClientRouter />
+  </head>
+  <body class="text-base font-rubik text-slate-900 dark:text-white dark:bg-slate-900">
+    <Navbar navLight={false} beforeNavbar={false}/>
+    <slot />
+    <Footer />
+  </body>
+</html>

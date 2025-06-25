@@ -1,33 +1,35 @@
 ---
-import About from '../components/about.astro';
-import Blog from '../components/blog.astro';
-import Client from '../components/client.astro';
-import Contact from '../components/contact.astro';
-import Counter from '../components/counter.astro';
-import Cta from '../components/cta.astro';
-import Feature from '../components/feature.astro';
-import Footer from '../components/footer.astro';
-import Partner from '../components/partner.astro';
-import Portfolio from '../components/portfolio.astro';
-import Pricing from '../components/pricing.astro';
-import Team from '../components/team.astro';
-import Work from '../components/work.astro';
+import About from '../components/About.astro';
+import Blog from '../components/Blog.astro';
+import Client from '../components/Client.astro';
+import Contact from '../components/Contact.astro';
+import Counter from '../components/Counter.astro';
+import Cta from '../components/Cta.astro';
+import Feature from '../components/Feature.astro';
+import Footer from '../components/Footer.astro';
+import Partner from '../components/Partner.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Pricing from '../components/Pricing.astro';
+import Team from '../components/Team.astro';
+import Work from '../components/Work.astro';
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/navbar.astro';
+import Navbar from '../components/Navbar.astro';
 import { heroData } from "../data";
 import videoWebm from '../assets/images/bg/video.webm';
+import Button from '../components/Button.astro';
 ---
 
 <Layout>
     <Navbar/>
-	<section class="relative w-full h-auto min-h-[80vh] lg:min-h-[100vh] overflow-hidden" id="home">
+	<section class="relative w-full h-auto min-h-[80vh] lg:min-h-[100vh] overflow-hidden" id="home" transition:name="hero">
         <!-- 🎬 VIDEO BACKGROUND -->
         <video 
             autoplay 
             muted 
             loop 
             playsinline 
-            class="absolute top-0 left-0 w-full h-full object-cover z-0"
+            class="absolute top-0 left-0 z-0 object-cover w-full h-full"
+            transition:persist
         >
 		<source src={videoWebm} type="video/webm" />
 
@@ -35,69 +37,74 @@ import videoWebm from '../assets/images/bg/video.webm';
         </video>
 
         <!-- DARK OVERLAY -->
-        <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
+        <div class="absolute inset-0 z-10 bg-black opacity-60"></div>
 
         <!-- CONTENT -->
         <div class="container relative z-20 py-36 lg:py-64">
             <div class="grid grid-cols-1 text-center">
-                <h4 class="text-white lg:text-5xl text-4xl lg:leading-normal leading-normal font-medium mb-7">
+                <h4 class="text-4xl font-medium leading-normal text-white lg:text-5xl lg:leading-normal mb-7" transition:name="hero-title">
                     {heroData.title}
                     <br />
                     {heroData.titleTwo}
-                    <span class="typewrite relative text-type-element" data-period="2000" data-type={`[ "${heroData.subtitle.join('", "')}"]`}></span>
+                    <span class="relative typewrite text-type-element" data-period="2000" data-type={`[ "${heroData.subtitle.join('", "')}"]`}></span>
+
                 </h4>
 
-                <p class="text-white opacity-70 mb-0 max-w-2xl text-lg mx-auto">
+                <p class="max-w-2xl mx-auto mb-0 text-lg text-white opacity-70" transition:name="hero-description">
                     {heroData.description}
                 </p>
 
-                <div class="relative mt-10">
+                <div class="relative mt-10" transition:name="hero-cta">
+                    <!-- Primary Call-to-Action Button 
                     <a 
                         href={heroData.buttonUrl} 
-                        class="inline-block bg-blue-700 hover:bg-blue-900 text-white font-semibold py-3 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        class="inline-block px-6 py-3 font-semibold text-white transition duration-300 ease-in-out transform bg-green-700 rounded-md shadow-lg hover:bg-green-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                     >
                         {heroData.buttonLabel}
-                    </a>
+                    </a> -->
+                    <Button label={heroData.buttonLabel} href={heroData.buttonUrl} width="fit" />
                 </div>
+                
+
             </div>
         </div>
     </section>
 	  
 
-    <section class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="about">
+    <section class="relative py-16 md:py-24 bg-gray-50 dark:bg-slate-800" id="about">
 		<About/>
 	</section>
 
-	<section class="relative md:py-24 py-16" id="features">
-		<Feature/>
+	<section class="relative py-16 md:py-24" id="features">
+		<Feature />
 		<Work/>
 	</section>
 
-	 <section class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="portfolio">
+	 <section class="relative py-16 md:py-24 bg-gray-50 dark:bg-slate-800" id="portfolio">
 		<Portfolio/>
 	</section>
 
 	<Cta/>
 
-	<section class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="testi">
+	<section class="relative py-16 md:py-24 bg-gray-50 dark:bg-slate-800" id="testi">
 		<Client/>
 	</section>
 
-	<section class="relative md:py-24 py-16" id="pricing">
+	<section class="relative py-16 md:py-24" id="pricing">
 		<Pricing/>
 	</section>
 
-	<section class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="team">
+	<section class="relative py-16 md:py-24 bg-gray-50 dark:bg-slate-800" id="team">
 		<Team/>
-		<Counter/>
+		<Counter />
 		<Partner/>
 	</section>
 
-	<section class="relative md:py-24 py-16" id="blog">
+	<section class="relative py-16 md:py-24" id="blog">
 		<Blog/>
 	</section>
 
-	<section class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800" id="contact">
+	<section class="relative py-16 md:py-24 bg-gray-50 dark:bg-slate-800" id="contact">
 		<Contact/>
 	</section>
 

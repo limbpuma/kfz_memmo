@@ -1,0 +1,59 @@
+---
+// agb.astro
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import LegalLayout from '../layouts/LegalLayout.astro';
+---
+
+<LegalLayout>
+
+  <section class="relative py-24 md:py-32 bg-gray-50 dark:bg-slate-800 min-h-[60vh]">
+    <div class="container">
+      <h1 class="mb-10 text-3xl font-bold text-center dark:text-white">Impressum</h1>
+      <div class="max-w-3xl mx-auto prose dark:prose-invert text-slate-700 dark:text-slate-300">
+        
+        <p><strong>Angaben gemäß § 5 TMG:</strong></p>
+        <p>
+          Mehmet Memmo<br />
+          KFZ-Service Memmo<br />
+          Eberstraße 12<br />
+          44145 Dortmund<br />
+          Deutschland
+        </p>
+
+        <p><strong>Kontakt:</strong><br />
+          Telefon: <a href="tel:+4915757057121">+49 1575 7057121</a><br />
+          E-Mail: <a href="mailto:m.dmli@web.de">m.dmli@web.de</a>
+        </p>
+
+        <p><strong>Umsatzsteuer-ID:</strong><br />
+          Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: <em>(wird ergänzt falls vorhanden)</em>
+        </p>
+
+        <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br />
+          Mehmet Memmo<br />
+          Eberstraße 12<br />
+          44145 Dortmund
+        </p>
+
+        <p><strong>Haftungsausschluss:</strong><br />
+          Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt
+          der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+        </p>
+
+        <p><strong>Streitschlichtung:</strong><br />
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+          <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.<br />
+          Unsere E-Mail-Adresse finden Sie oben im Impressum.<br />
+          Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </div>
+
+      <div class="mt-12 text-center">
+        <Button label="← Zurück zur Startseite" href="/" width="fit" />
+      </div>
+    </div>
+  </section>
+
+</LegalLayout>
