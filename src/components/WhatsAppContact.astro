@@ -2,11 +2,12 @@
 // WhatsApp Contact Component
 ---
 
-<div class="fixed z-50 bottom-6 right-6" id="whatsapp-widget">
+<div class="fixed bottom-6 right-6" style="z-index: 99999 !important;" id="whatsapp-widget">
   <!-- WhatsApp Floating Button -->
   <button 
     id="whatsapp-btn"
-    class="p-4 text-white transition-all duration-300 transform bg-green-500 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 animate-pulse cursor-pointer"
+    class="p-4 text-white transition-all duration-300 transform bg-green-500 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 cursor-pointer"
+    style="z-index: 99999 !important; position: relative !important;"
     title="Kontakt via WhatsApp"
     type="button"
     onclick="console.log('🔥 Inline click detected!'); document.getElementById('whatsapp-form').classList.toggle('hidden');"
@@ -20,7 +21,14 @@
   <div 
     id="whatsapp-form" 
     class="absolute right-0 hidden p-6 bg-white border border-gray-200 rounded-lg shadow-xl bottom-16 dark:bg-slate-800 w-80 dark:border-slate-600"
+    style="z-index: 99998 !important;"
   >
+    <!-- Test button for debugging -->
+    <div class="mb-4 p-2 bg-red-100 rounded">
+      <button onclick="alert('Form is working!');" class="px-2 py-1 bg-red-500 text-white rounded text-xs">
+        🧪 TEST FORM
+      </button>
+    </div>
     <div class="flex items-center justify-between mb-4">
       <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Schneller Kontakt</h3>
       <button id="close-form" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
@@ -363,6 +371,17 @@
 </script>
 
 <style>
+  @keyframes customPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+  }
+
   @keyframes slideInRight {
     from {
       transform: translateX(100%);
@@ -379,12 +398,18 @@
   }
 
   #whatsapp-btn {
-    z-index: 9999 !important;
+    animation: customPulse 2s infinite;
+    z-index: 99999 !important;
     position: relative !important;
   }
 
+  #whatsapp-btn:hover {
+    animation: none;
+    transform: scale(1.1);
+  }
+
   #whatsapp-form {
-    z-index: 9998 !important;
+    z-index: 99998 !important;
   }
 
   @media (max-width: 640px) {
