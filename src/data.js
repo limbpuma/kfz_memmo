@@ -455,9 +455,9 @@ export const footerData = {
       image: logo,
       alt: 'Logo'
   },
-  copyrightText: "Design with ",
+  copyrightText: "Developed by",
   designerLink: {
-      url: "https://limbermartinez.com/",
+      url: "https://www.limbermartinez.com/",
       text: "Mtz"
   },
   links: [
@@ -477,13 +477,8 @@ export const footerData = {
   socialLinks: [
       {
           iconClass: "uil uil-linkedin",
-          url: "http://linkedin.com/company/shreethemes",
+          url: "https://www.linkedin.com/in/limber-martinez-developer/",
           title: "LinkedIn"
-      },
-      {
-          iconClass: "uil uil-envelope",
-          url: "mailto:support@shreethemes.in",
-          title: "Email"
       }
   ]
 };

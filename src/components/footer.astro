@@ -40,8 +40,13 @@ import { Image } from 'astro:assets';
           </div>
 
             <div class="mt-8 md:col-span-5 md:mt-0">
-                <div class="text-center">
-                    <p class="text-gray-400">© {footerData.year}. {footerData.copyrightText} <i class="text-green-700 mdi mdi-heart"></i> by <a href={footerData.designerLink.url} target="_blank" class="text-reset">{footerData.designerLink.text}</a>.</p>
+                <div class="flex flex-col gap-4 text-center sm:flex-row sm:items-center sm:justify-center">
+                    <p class="text-sm text-gray-400 sm:text-base">© {footerData.year}. {footerData.copyrightText} <i class="text-green-700 mdi mdi-heart"></i> by <a href={footerData.designerLink.url} target="_blank" class="text-reset">{footerData.designerLink.text}</a>.</p>
+                    <ul class="flex items-center justify-center gap-2">
+                        {footerData.socialLinks.map(social => (
+                            <li><a href={social.url} target="_blank" class="text-gray-400 transition-colors duration-200 border rounded-md btn btn-icon btn-sm border-slate-700 dark:border-slate-800 hover:border-blue-600 bg-slate-800 dark:bg-gray-900 hover:bg-green-600 dark:hover:bg-green-600 hover:text-white"><i class={social.iconClass} title={social.title}></i></a></li>
+                        ))}
+                    </ul>
                 </div>
             </div>
 
@@ -50,9 +55,7 @@ import { Image } from 'astro:assets';
                     {footerData.links.map(link => (
                         <li class="inline"><a href={link.url} class="mx-2 text-gray-400 hover:text-white">{link.title}</a></li>
                     ))}
-                    {footerData.socialLinks.map(social => (
-                        <li class="inline"><a href={social.url} target="_blank" class="mx-auto text-gray-400 border rounded-md btn btn-icon btn-sm border-slate-700 dark:border-slate-800 hover:border-blue-600 bg-slate-800 dark:bg-gray-900 hover:bg-green-600 dark:hover:bg-green-600 hover:text-white"><i class={social.iconClass} title={social.title}></i></a></li>
-                    ))}
+                    
                 </ul>
             </div>
         </div>
