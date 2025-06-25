@@ -1,17 +1,18 @@
-// WhatsApp Widget - Production Version with Responsive & Cookie Banner Support
+// WhatsApp Widget - Production Version with Cookie Banner Support
 function initWhatsAppWidget() {
   try {
     const btn = document.getElementById('whatsapp-btn');
     const form = document.getElementById('whatsapp-form');
+    const backdrop = document.getElementById('whatsapp-backdrop');
     const closeBtn = document.getElementById('close-form');
     const contactForm = document.getElementById('whatsapp-contact-form');
     
-    if (!btn || !form || !closeBtn || !contactForm) {
+    if (!btn || !form || !closeBtn || !contactForm || !backdrop) {
       setTimeout(initWhatsAppWidget, 200);
       return;
     }
 
-    // Cookie banner detection and position adjustment
+    // Cookie banner detection for positioning
     function checkCookieBanner() {
       const cookieBanner = document.querySelector('.cc-banner, .cc-window');
       if (cookieBanner && cookieBanner.style.display !== 'none') {
@@ -21,15 +22,8 @@ function initWhatsAppWidget() {
       }
     }
 
-    // Check cookie banner periodically
-    const cookieCheckInterval = setInterval(checkCookieBanner, 500);
-    
-    // Stop checking after cookie banner is dismissed
-    setTimeout(() => {
-      if (cookieCheckInterval) {
-        clearInterval(cookieCheckInterval);
-      }
-    }, 30000);
+    // Check for cookie banner periodically
+    setInterval(checkCookieBanner, 1000);
     
     // Global toggle function
     window.toggleWhatsApp = function() {
@@ -39,11 +33,20 @@ function initWhatsAppWidget() {
           form.style.setProperty('display', 'block', 'important');
           form.style.setProperty('visibility', 'visible', 'important');
           form.style.setProperty('opacity', '1', 'important');
-          form.style.setProperty('transform', 'translateX(0)', 'important');
-          form.style.setProperty('position', 'absolute', 'important');
           
+          // Mobile positioning handled by CSS
           form.classList.remove('hidden');
           form.classList.add('show');
+          
+          // Ensure form is above everything
+          form.style.setProperty('z-index', '999999', 'important');
+          
+          // Show backdrop on mobile
+          if (window.innerWidth <= 640) {
+            backdrop.style.setProperty('display', 'block', 'important');
+            backdrop.classList.add('show');
+            document.body.style.overflow = 'hidden';
+          }
         } else {
           // Hide form
           form.style.setProperty('display', 'none', 'important');
@@ -51,6 +54,11 @@ function initWhatsAppWidget() {
           form.style.setProperty('opacity', '0', 'important');
           form.classList.add('hidden');
           form.classList.remove('show');
+          
+          // Hide backdrop and restore scroll
+          backdrop.style.setProperty('display', 'none', 'important');
+          backdrop.classList.remove('show');
+          document.body.style.overflow = '';
         }
       } catch(e) {
         console.error('WhatsApp widget error:', e);
@@ -65,35 +73,24 @@ function initWhatsAppWidget() {
       form.style.setProperty('opacity', '0', 'important');
       form.classList.add('hidden');
       form.classList.remove('show');
+      
+      // Hide backdrop and restore scroll
+      backdrop.style.setProperty('display', 'none', 'important');
+      backdrop.classList.remove('show');
+      document.body.style.overflow = '';
     };
 
-    // Close form when clicking outside (mobile-friendly)
-    document.addEventListener('click', function(e) {
-      if (form.style.display === 'block' || form.classList.contains('show')) {
-        const widget = document.getElementById('whatsapp-widget');
-        if (widget && !widget.contains(e.target)) {
-          form.style.setProperty('display', 'none', 'important');
-          form.style.setProperty('visibility', 'hidden', 'important');
-          form.style.setProperty('opacity', '0', 'important');
-          form.classList.add('hidden');
-          form.classList.remove('show');
-        }
+    // Backdrop click handler
+    backdrop.onclick = function(e) {
+      if (e.target === backdrop) {
+        form.style.setProperty('display', 'none', 'important');
+        form.classList.add('hidden');
+        form.classList.remove('show');
+        backdrop.style.setProperty('display', 'none', 'important');
+        backdrop.classList.remove('show');
+        document.body.style.overflow = '';
       }
-    });
-
-    // Handle screen rotation and resize
-    window.addEventListener('resize', function() {
-      // Force reposition on mobile when rotating
-      if (window.innerWidth <= 640) {
-        checkCookieBanner();
-      }
-    });
-
-    // Touch events for better mobile interaction
-    btn.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      if (window.toggleWhatsApp) window.toggleWhatsApp();
-    });
+    };
     
     // Form submission handler
     contactForm.onsubmit = function(e) {
@@ -198,6 +195,11 @@ function initWhatsAppWidget() {
             submitBtn.innerHTML = originalText;
             contactForm.reset();
             form.style.display = 'none';
+            form.classList.add('hidden');
+            form.classList.remove('show');
+            backdrop.style.setProperty('display', 'none', 'important');
+            backdrop.classList.remove('show');
+            document.body.style.overflow = '';
           }, 2000);
         }, 1000);
       }
@@ -205,8 +207,13 @@ function initWhatsAppWidget() {
     
     // Close on outside click
     document.addEventListener('click', function(e) {
-      if (!form.contains(e.target) && !btn.contains(e.target)) {
+      if (!form.contains(e.target) && !btn.contains(e.target) && !backdrop.contains(e.target)) {
         form.style.display = 'none';
+        form.classList.add('hidden');
+        form.classList.remove('show');
+        backdrop.style.setProperty('display', 'none', 'important');
+        backdrop.classList.remove('show');
+        document.body.style.overflow = '';
       }
     });
     
